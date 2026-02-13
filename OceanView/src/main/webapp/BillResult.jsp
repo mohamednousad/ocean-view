@@ -78,7 +78,6 @@ button{
 <body>
 
 <div class="container">
-
 <h2>Ocean View Resort Bill</h2>
 
 <div class="section">
