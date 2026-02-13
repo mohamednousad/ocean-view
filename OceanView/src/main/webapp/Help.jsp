@@ -41,7 +41,7 @@ img{
 
 <h1>User Guide</h1>
 
-<	div class="section">
+<div class="section">
 <h2>1. Login to the System</h2>
 <p>Staff members must log in using their assigned username and password.</p>
 <ul>
