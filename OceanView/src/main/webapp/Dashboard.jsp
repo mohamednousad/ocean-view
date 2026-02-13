@@ -35,9 +35,19 @@
     background:#ffffff;
     color:#000;
 }
-.logout{
+.logoutBtn{
     margin-top:auto;
+    display:block;
+    text-align:center;
+    padding:10px 0;
+    background:#fff;
+    color:#000 !important;
+    font-weight:600;
+    border-radius:6px;
+    text-decoration:none;
+    transition:0.2s;
 }
+
 .main{
     flex:1;
     display:flex;
@@ -72,7 +82,7 @@ iframe{
     <a href="ViewReservation.jsp" target="contentFrame">View Reservation</a>
     <a href="Bill.jsp" target="contentFrame">Calculate Bill</a>
     <a href="Help.jsp" target="contentFrame">Help</a>
-    <a class="logout" href="LogoutServlet">Logout</a>
+    <a class="logoutBtn" href="LogoutServlet">Logout</a>
 </div>
 
 <div class="main">
