@@ -17,7 +17,7 @@ public class LoginServlet extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/test",
+                    "jdbc:mysql://localhost:3306/oceanview",
                     "root",
                     ""   
             );
@@ -30,21 +30,18 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                // ✅ SUCCESS → FORWARD
                 request.setAttribute("username", username);
-                RequestDispatcher rd = request.getRequestDispatcher("welcome.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("Dashboard.jsp");
                 rd.forward(request, response);
-                return; // VERY IMPORTANT
+                return; 
             } else {
-                // ❌ FAILED → BACK TO LOGIN
                 request.setAttribute("error", "Invalid username or password");
-                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
                 rd.forward(request, response);
                 return;
             }
 
         } catch (Exception e) {
-            // 🔴 SHOW ERROR (for debugging)
             response.setContentType("text/html");
             response.getWriter().println("<h3>Error occurred</h3>");
             e.printStackTrace(response.getWriter());
