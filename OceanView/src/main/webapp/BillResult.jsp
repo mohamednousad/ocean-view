@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bill Details - Ocean View Resort</title>
+    <title>Bill</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
@@ -59,8 +59,8 @@
         </div>
 
         <div class="bill-actions">
-            <button class="cancelBtn" onclick="window.location='Dashboard.jsp?page=bill'">
-                <i class="fas fa-arrow-left"></i> Go Back
+            <button class="cancelBtn" onclick="window.location='Bill.jsp'">
+                Back
             </button>
             <button class="updateBtn" onclick="window.print()">
                 <i class="fas fa-print"></i> Print
