@@ -1,132 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Bill Details</title>
-<style>
-body{
-    font-family:Arial, sans-seri;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     height: 100vh;
-     margin: 0;
-}
-.container{
-    width:520px;
-    background:#ffffff;
-    padding:35px;
-    border-radius:12px;
-}
-h2{
-    text-align:center;
-    color:#0d6efd;
-    margin-bottom:25px;
-}
-.section{
-    margin-bottom:15px;
-}
-.row{
-    display:flex;
-    justify-content:space-between;
-    padding:6px 0;
-    border-bottom:1px solid #eee;
-}
-.label{
-    font-weight:600;
-    color:#555;
-}
-.value{
-    color:#222;
-}
-.total{
-    display:flex;
-    justify-content:space-between;
-    margin-top:20px;
-    font-size:18px;
-    font-weight:700;
-    color:#000;
-}
-.actions{
-    margin-top:25px;
-    display:flex;
-    gap:10px;
-}
-button{
-    flex:1;
-    padding:10px;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:14px;
-}
-.print{
-    background:#0d6efd;
-    color:#fff;
-}
-.print:hover{
-    background:#0b5ed7;
-}
-.back{
-    background:#6c757d;
-    color:#fff;
-}
-.back:hover{
-    background:#5c636a;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Details - Ocean View Resort</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 
-<div class="container">
-<h2>Ocean View Resort Bill</h2>
+<div class="bill-wrapper">
+    <div class="bill-container">
+        
+        <div class="bill-header">
+            <h2>Ocean View Resort</h2>
+            <p>Payment Invoice</p>
+        </div>
 
-<div class="section">
-<div class="row">
-<span class="label">Reservation No</span>
-<span class="value">${resNo}</span>
-</div>
+        <div class="bill-section">
+            <div class="bill-row">
+                <span class="bill-label">Reservation No</span>
+                <span class="bill-value">#${resNo}</span>
+            </div>
 
-<div class="row">
-<span class="label">Guest Name</span>
-<span class="value">${guest}</span>
-</div>
+            <div class="bill-row">
+                <span class="bill-label">Guest Name</span>
+                <span class="bill-value">${guest}</span>
+            </div>
 
-<div class="row">
-<span class="label">Room Type</span>
-<span class="value">${room}</span>
-</div>
+            <div class="bill-row">
+                <span class="bill-label">Room Type</span>
+                <span class="bill-value">${room}</span>
+            </div>
 
-<div class="row">
-<span class="label">Check In</span>
-<span class="value">${checkIn}</span>
-</div>
+            <div class="bill-row">
+                <span class="bill-label">Check In</span>
+                <span class="bill-value">${checkIn}</span>
+            </div>
 
-<div class="row">
-<span class="label">Check Out</span>
-<span class="value">${checkOut}</span>
-</div>
+            <div class="bill-row">
+                <span class="bill-label">Check Out</span>
+                <span class="bill-value">${checkOut}</span>
+            </div>
 
-<div class="row">
-<span class="label">Total Days</span>
-<span class="value">${days}</span>
-</div>
+            <div class="bill-row">
+                <span class="bill-label">Duration</span>
+                <span class="bill-value">${days} Days</span>
+            </div>
 
-<div class="row">
-<span class="label">Rate Per Day</span>
-<span class="value">Rs. ${rate}</span>
-</div>
-</div>
+            <div class="bill-row">
+                <span class="bill-label">Rate per Night</span>
+                <span class="bill-value">Rs. ${rate}</span>
+            </div>
+        </div>
 
-<div class="total">
-<span>Total Amount</span>
-<span>Rs. ${total}</span>
-</div>
+        <div class="bill-total">
+            <span class="total-label">Total</span>
+            <span class="total-amount">Rs. ${total}</span>
+        </div>
 
-<div class="actions">
-<button class="back" onclick="window.location='Bill.jsp'">Cancel</button>
-<button class="print" onclick="window.print()">Print Bill</button>
-</div>
+        <div class="bill-actions">
+            <button class="cancelBtn" onclick="window.location='Dashboard.jsp?page=bill'">
+                <i class="fas fa-arrow-left"></i> Go Back
+            </button>
+            <button class="updateBtn" onclick="window.print()">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
 
+    </div>
 </div>
 
 </body>

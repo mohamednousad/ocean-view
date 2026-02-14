@@ -1,91 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Help - Ocean View Resort</title>
-<style>
-body{
-    font-family:Arial,Helvetica,sans-serif;
-}
-h1{
-    color:#075cb8;
-    margin-bottom:20px;
-}
-.section{
-    margin-bottom:40px;
-}
-.section h2{
-    color:#007bff;
-    margin-bottom:10px;
-}
-.section p{
-    margin:6px 0;
-    line-height:1.6;
-    color:#333;
-}
-.section ul{
-    margin-top:10px;
-    padding-left:20px;
-}
-.section li{
-    margin-bottom:6px;
-}
-img{
-    width:100%;
-    max-width:700px;
-    margin-top:15px;
-    border:1px solid #ccc;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Guide - Ocean View Resort</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 
-<h1>User Guide</h1>
+<div class="help-container">
+    <div class="help-header">
+        <h1>User Guide and Documentation</h1>
+        <p>Step-by-step instructions for managing the Ocean View Resort System.</p>
+    </div>
 
-<div class="section">
-<h2>1. Login to the System</h2>
-<p>Staff members must log in using their assigned username and password.</p>
-<ul>
-<li>Enter your username.</li>
-<li>Enter your password.</li>
-<li>Click the Login button to access the dashboard.</li>
-</ul>
-<img src="images/login.png" alt="Login Screenshot">
+    <div class="help-section">
+        <h2><span class="badge-step">1</span> Login to System</h2>
+        <p>Staff members must authenticate to access the dashboard securely.</p>
+        <ul>
+            <li>Enter your registered username in the first field.</li>
+            <li>Enter your secure password.</li>
+            <li>Click the "Login" button to verify credentials.</li>
+        </ul>
+        <img src="images/login.png" alt="Login Screen Interface" class="help-img" onerror="this.style.display='none'">
+    </div>
+
+    <div class="help-section">
+        <h2><span class="badge-step">2</span> Create New Reservation</h2>
+        <p>Use the "Add Reservation" module to register walk-in guests or phone bookings.</p>
+        <ul>
+            <li>Navigate to "Add Reservation" via the sidebar.</li>
+            <li>Fill in Guest Name, Contact Number, and Residential Address.</li>
+            <li>Select the Room Type (Standard, Deluxe, or Suite).</li>
+            <li>Pick valid Check-in and Check-out dates.</li>
+            <li>Click "Save Reservation" to store data in the system.</li>
+        </ul>
+        <img src="images/add.png" alt="Add Reservation Form" class="help-img" onerror="this.style.display='none'">
+    </div>
+
+    <div class="help-section">
+        <h2><span class="badge-step">3</span> Manage Bookings</h2>
+        <p>View, Edit, or Delete existing reservations from the database.</p>
+        <ul>
+            <li>Go to "View Reservation" to see a full list of guests.</li>
+            <li>Click the <strong>Edit</strong> button to modify dates or room types.</li>
+            <li>Click the <strong>Delete</strong> button to remove cancelled bookings.</li>
+            <li>Use the pop-up modal to quickly update guest details without leaving the page.</li>
+        </ul>
+        <img src="images/view.png" alt="Manage Reservations Table" class="help-img" onerror="this.style.display='none'">
+    </div>
+
+    <div class="help-section">
+        <h2><span class="badge-step">4</span> Billing & Invoicing</h2>
+        <p>Generate accurate bills based on room rates and duration of stay.</p>
+        <ul>
+            <li>Navigate to "Calculate Bill".</li>
+            <li>Use the search bar or dropdown to find the Reservation ID.</li>
+            <li>Click "Generate Invoice" to view the breakdown.</li>
+            <li>Review the total amount and click "Print Invoice" for a physical copy.</li>
+        </ul>
+        <img src="images/bill.png" alt="Billing Interface" class="help-img" onerror="this.style.display='none'">
+    </div>
 </div>
 
-<div class="section">
-<h2>2. Add New Reservation</h2>
-<p>Use this section to register a new guest booking.</p>
-<ul>
-<li>Click "Add Reservation" from the dashboard.</li>
-<li>Fill in guest name, address, contact number.</li>
-<li>Select room type.</li>
-<li>Choose check-in and check-out dates.</li>
-<li>Click Submit to save the reservation.</li>
-</ul>
-<img src="images/add.png" alt="Add Reservation Screenshot">
-</div>
-
-<div class="section">
-<h2>3. View Reservation Details</h2>
-<p>This section allows staff to check existing booking information.</p>
-<ul>
-<li>Select "View Reservation".</li>
-<li>Enter reservation number.</li>
-<li>Click Search to display booking details.</li>
-</ul>
-<img src="images/view.png" alt="View Reservation Screenshot">
-</div>
-
-<div class="section">
-<h2>4. Calculate and Print Bill</h2>
-<p>Generate total payment for completed stays.</p>
-<ul>
-<li>Click "Calculate Bill".</li>
-<li>Select reservation number from dropdown.</li>
-<li>Click Calculate to generate bill.</li>
-<li>Use Print button to print the invoice.</li>
-</ul>
-<img src="images/bill.png" alt="Bill Screenshot">
-</div>
 </body>
 </html>
