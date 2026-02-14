@@ -3,13 +3,14 @@ import java.sql.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet("/AddReservationServlet")
 public class AddReservationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String reservationNo = request.getParameter("reservationNo");
         String guestName = request.getParameter("guestName");
         String address = request.getParameter("address");
         String contact = request.getParameter("contact");
@@ -21,6 +22,24 @@ public class AddReservationServlet extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/oceanview", "root", "");
+
+            Date today = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            String datePart = sdf.format(today);
+            char roomChar = roomType.charAt(0);
+
+            String seqSql = "SELECT COUNT(*) FROM reservations WHERE reservation_no LIKE ?";
+            PreparedStatement seqPs = con.prepareStatement(seqSql);
+            seqPs.setString(1, roomChar + "-" + datePart + "%");
+            ResultSet rs = seqPs.executeQuery();
+
+            int seq = 1;
+            if (rs.next()) {
+                seq += rs.getInt(1);
+            }
+            String sequence = String.format("%03d", seq);
+            String reservationNo = roomChar + "-" + datePart + "-" + sequence;
+
             String sql = "INSERT INTO reservations VALUES (?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, reservationNo);
@@ -32,7 +51,7 @@ public class AddReservationServlet extends HttpServlet {
             ps.setString(7, checkOut);
             ps.executeUpdate();
 
-            request.setAttribute("msg", "Reservation Added Successfully");
+            request.setAttribute("msg", "Reservation Added Successfully: " + reservationNo);
             RequestDispatcher rd = request.getRequestDispatcher("AddReservation.jsp");
             rd.forward(request, response);
 

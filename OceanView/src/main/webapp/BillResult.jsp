@@ -19,7 +19,7 @@ body{
 }
 h2{
     text-align:center;
-    color:#198754;
+    color:#0d6efd;
     margin-bottom:25px;
 }
 .section{
@@ -123,8 +123,8 @@ button{
 </div>
 
 <div class="actions">
+<button class="back" onclick="window.location='Bill.jsp'">Cancel</button>
 <button class="print" onclick="window.print()">Print Bill</button>
-<button class="back" onclick="window.location='Bill.jsp'">Back</button>
 </div>
 
 </div>
