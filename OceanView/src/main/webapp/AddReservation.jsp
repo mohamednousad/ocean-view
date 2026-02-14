@@ -37,7 +37,7 @@
         </div>
          <textarea name="address" placeholder="Enter Residential Address" required></textarea>
         <div class="full">
-            <button class="saveBtn" type="submit">Save Reservation</button>
+            <button class="saveBtn" type="submit"><i class="fa-regular fa-floppy-disk"></i> Save</button>
         </div>
     </form>
 </div>

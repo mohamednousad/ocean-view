@@ -32,6 +32,10 @@ public class BillServlet extends HttpServlet {
                 LocalDate out=rs.getDate("check_out").toLocalDate();
 
                 long days=ChronoUnit.DAYS.between(in,out);
+                
+                if(days==0){
+                    days=1;
+                }
 
                 String room=rs.getString("room_type");
                 int rate;
@@ -58,13 +62,13 @@ public class BillServlet extends HttpServlet {
 
             }else{
                 request.setAttribute("error","Reservation Not Found");
-                request.getRequestDispatcher("bill.jsp")
+                request.getRequestDispatcher("Bill.jsp")
                        .forward(request,response);
             }
 
         }catch(Exception e){
             request.setAttribute("error","System Error");
-            request.getRequestDispatcher("bill.jsp")
+            request.getRequestDispatcher("Bill.jsp")
                    .forward(request,response);
         }
     }
