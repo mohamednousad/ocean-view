@@ -26,7 +26,7 @@ public class AddReservationServlet extends HttpServlet {
             Date today = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             String datePart = sdf.format(today);
-            char roomChar = roomType.charAt(0);
+            String roomChar = roomType.substring(0, 2).toUpperCase();
 
             String seqSql = "SELECT COUNT(*) FROM reservations WHERE reservation_no LIKE ?";
             PreparedStatement seqPs = con.prepareStatement(seqSql);
