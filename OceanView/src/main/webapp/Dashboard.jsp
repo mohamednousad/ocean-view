@@ -1,3 +1,9 @@
+<%
+    if(session.getAttribute("username") == null){
+        response.sendRedirect("index.jsp");
+        return; 
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +16,10 @@
 
 <div class="dashboard-wrapper">
     <div class="sidebar">
-        <h2><i class="fa-solid fa-hotel"></i> Welcome, <%= request.getAttribute("username") %>!</h2>
+        <h2><i class="fa-solid fa-hotel"></i> Welcome, <%= session.getAttribute("username") %>!</h2>
         
-        <a href="AddReservation.jsp" target="contentFrame" class="active" onclick="setActive(this)">
-            <i class="fa-solid fa-calendar-plus"></i> Add Reservation
-        </a>
-        
-        <a href="ViewReservation.jsp" target="contentFrame" onclick="setActive(this)">
-            <i class="fa-solid fa-list-check"></i> View Reservation
+        <a href="ViewReservationServlet" target="contentFrame" class="active" onclick="setActive(this)">
+            <i class="fa-solid fa-list-check"></i> Reservations
         </a>
         
         <a href="Bill.jsp" target="contentFrame" onclick="setActive(this)">
@@ -28,14 +30,14 @@
             <i class="fa-solid fa-circle-question"></i> Help
         </a>
         
-        <a class="logoutBtn" href="LogoutServlet">
+        <a class="logoutBtn" href="Logout.jsp">
             <i class="fa-solid fa-right-from-bracket"></i> Logout
         </a>
     </div>
 
     <div class="main">
         <div class="content">
-            <iframe name="contentFrame" src="AddReservation.jsp"></iframe>
+            <iframe name="contentFrame" src="ViewReservationServlet"></iframe>
         </div>
         <div class="footer">
             &copy; 2026 Ocean View Resort. All Rights Reserved.
@@ -43,15 +45,6 @@
     </div>
 </div>
 
-<script>
-    function setActive(element) {
-        const links = document.querySelectorAll('.sidebar a:not(.logoutBtn)');
-        links.forEach(link => {
-            link.classList.remove('active');
-        });
-        element.classList.add('active');
-    }
-</script>
-
+<script src="./js/script.js"></script>
 </body>
 </html>
