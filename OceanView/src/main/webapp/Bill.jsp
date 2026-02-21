@@ -61,8 +61,8 @@
                 </select>
             </div>
 
-            <button type="submit" class="updateBtn" style="width: 100%; margin-top: 10px;">
-                <i class="fas fa-calculator"></i> Calculate
+            <button type="submit" class="btn primary" style="width: 100%; margin-top: 10px;">
+                Calculate
             </button>
         </form>
 
@@ -72,22 +72,6 @@
     </div>
 </div>
 
-<script>
-    function filterReservations() {
-        var input = document.getElementById("searchInput");
-        var filter = input.value.toUpperCase();
-        var select = document.getElementById("reservationSelect");
-        var options = select.getElementsByTagName("option");
-
-        for (var i = 0; i < options.length; i++) {
-            var txtValue = options[i].textContent || options[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                options[i].style.display = "";
-            } else {
-                options[i].style.display = "none";
-            }
-        }
-    }
-</script>
+<script src="./js/script.js"></script>
 </body>
 </html>

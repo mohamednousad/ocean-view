@@ -43,8 +43,8 @@
             </div>
 
             <div class="bill-row">
-                <span class="bill-label">Duration</span>
-                <span class="bill-value">${days} Days</span>
+                <span class="bill-label">Days</span>
+                <span class="bill-value">${days}</span>
             </div>
 
             <div class="bill-row">
@@ -59,16 +59,15 @@
         </div>
 
         <div class="bill-actions">
-            <button class="cancelBtn" onclick="window.location='Bill.jsp'">
+            <button class="btn secondary" onclick="window.location='Bill.jsp'">
                 Back
             </button>
-            <button class="updateBtn" onclick="window.print()">
-                <i class="fas fa-print"></i> Print
+            <button class="btn primary" onclick="window.print()">
+                <i class="fas fa-print"></i> Print 
             </button>
         </div>
 
     </div>
 </div>
-
 </body>
 </html>
