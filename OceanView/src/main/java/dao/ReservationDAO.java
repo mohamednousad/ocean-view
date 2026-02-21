@@ -74,18 +74,18 @@ public class ReservationDAO {
         return null;
     }
     
-    public boolean update(Reservation r) {
+    public boolean update(Reservation reservation) {
         String sql = "UPDATE reservations SET guest_name=?, contact=?, room_type=?, check_in=?, check_out=?, address=? WHERE reservation_no=?";
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             
-            ps.setString(1, r.getGuestName());
-            ps.setString(2, r.getContact());
-            ps.setString(3, r.getRoomType());
-            ps.setString(4, r.getCheckIn());
-            ps.setString(5, r.getCheckOut());
-            ps.setString(6, r.getAddress());
-            ps.setString(7, r.getReservationNo());
+            ps.setString(1, reservation.getGuestName());
+            ps.setString(2, reservation.getContact());
+            ps.setString(3, reservation.getRoomType());
+            ps.setString(4, reservation.getCheckIn());
+            ps.setString(5, reservation.getCheckOut());
+            ps.setString(6, reservation.getAddress());
+            ps.setString(7, reservation.getReservationNo());
             return ps.executeUpdate() > 0;
             
         } catch (Exception e) { e.printStackTrace(); return false; }

@@ -14,7 +14,7 @@
             <input type="password" name="password" placeholder="Password" required>
             <input type="submit" value="Login">
         </form>
-        <div class="error">
+        <div class="login-error">
             <%= request.getAttribute("error") == null ? "" : request.getAttribute("error") %>
         </div>
     </div>

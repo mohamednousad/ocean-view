@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.time.LocalDate;
 import util.DBConnection;
+import model.Reservation;
 
 public class ReservationService {
 
@@ -28,6 +30,30 @@ public class ReservationService {
             }
             
             return String.format("%s-%03d", prefix, sequence);
+        }
+    }
+    
+    public String validateDates(String checkInDate, String checkOutDate) {
+        if (checkInDate == null || checkInDate.trim().isEmpty() || checkOutDate == null || checkOutDate.trim().isEmpty()) {
+            return "Dates cannot be empty.";
+        }
+        
+        try {
+            LocalDate checkIn = LocalDate.parse(checkInDate);
+            LocalDate checkOut = LocalDate.parse(checkOutDate);
+            LocalDate today = LocalDate.now();
+
+            if (checkIn.isBefore(today) || checkOut.isBefore(today)) {
+                return "Dates cannot be in the past.";
+            }
+
+            if (!checkOut.isAfter(checkIn)) {
+                return "Check-out date must be after the check-in date.";
+            }
+            
+            return null;
+        } catch (Exception e) {
+            return "Invalid date format.";
         }
     }
 }

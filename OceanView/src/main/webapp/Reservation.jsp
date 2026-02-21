@@ -25,7 +25,8 @@
             <input type="text" id="searchInput" class="search-input" placeholder="Search reservations (ID, Name, Contact, Room, Date)...">
         </div>
 
-        <div class="msg" style="color: green; margin-bottom: 10px;"><%= request.getAttribute("msg") != null ? request.getAttribute("msg") : "" %></div>
+        <div class="msg"><%= request.getAttribute("msg") != null ? request.getAttribute("msg") : "" %></div>
+        <div class="error"><%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %></div>
         
         <div class="table-responsive">
            <table id="reservationTable">
@@ -62,7 +63,7 @@
 			            <td><%= r.getCheckOut() %></td>
 			            <td><%= days %> Days</td>
 			             <td class="text-center">
-                            <button class="btn primary" onclick="openModal('edit', '<%= r.getReservationNo() %>', '<%= r.getGuestName() %>', '<%= r.getContact() %>', '<%= r.getRoomType() %>', '<%= r.getCheckIn() %>', '<%= r.getCheckOut() %>', '<%= r.getAddress() %>')">
+                            <button class="btn secondary" onclick="openModal('edit', '<%= r.getReservationNo() %>', '<%= r.getGuestName() %>', '<%= r.getContact() %>', '<%= r.getRoomType() %>', '<%= r.getCheckIn() %>', '<%= r.getCheckOut() %>', '<%= r.getAddress() %>')">
                                 <i class="fa-solid fa-pen-to-square"></i> Edit
                             </button>
                             <button class="btn delete" onclick="openDeleteModal('<%= r.getReservationNo() %>')">
