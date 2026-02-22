@@ -24,16 +24,9 @@ public class ViewReservationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String checkIn = request.getParameter("checkIn");
-        String checkOut = request.getParameter("checkOut");
 
-        String dateError = service.validateDates(checkIn, checkOut);
 
-        if (dateError != null) {
-            request.setAttribute("error", dateError);
-        }
-
-        else { String action = request.getParameter("action");
+        String action = request.getParameter("action");
         String id = request.getParameter("reservationNo");
 
         if ("search".equals(action)) {
@@ -52,6 +45,16 @@ public class ViewReservationServlet extends HttpServlet {
             }
         } 
         else if ("update".equals(action)) {
+            String checkIn = request.getParameter("checkIn");
+            String checkOut = request.getParameter("checkOut");
+
+            String dateError = service.validateDates(checkIn, checkOut);
+
+            if (dateError != null) {
+                request.setAttribute("error", dateError);
+                return;
+            }
+            
             Reservation r = new Reservation();
             r.setReservationNo(id);
             r.setGuestName(request.getParameter("guestName"));
@@ -67,7 +70,6 @@ public class ViewReservationServlet extends HttpServlet {
             } else {
                 request.setAttribute("error", "Update Failed");
             }
-        }
         }
 
         loadReservations(request, response);

@@ -47,8 +47,8 @@ public class ReservationService {
                 return "Dates cannot be in the past.";
             }
 
-            if (!checkOut.isAfter(checkIn)) {
-                return "Check-out date must be after the check-in date.";
+            if (checkIn.isAfter(checkOut)) {
+                return "Check-in date must be before the check-out date.";
             }
             
             return null;
