@@ -11,13 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Ocean View Resort</title>
     <link rel="stylesheet" href="./css/style.css">
+     <link rel="icon" type="image/x-icon" href="logo.ico">
 </head>
 <body>
 
 <div class="dashboard-wrapper">
     <div class="sidebar">
-        <h2><i class="fa-solid fa-hotel"></i> Welcome, <%= session.getAttribute("username") %>!</h2>
-        
+        <h2><img src="logo.ico" alt="Logo" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;"> Welcome, <%= session.getAttribute("username") %>!</h2>
         <a href="ViewReservationServlet" target="contentFrame" class="active" onclick="setActive(this)">
             <i class="fa-solid fa-list-check"></i> Reservations
         </a>
