@@ -23,7 +23,7 @@
             <strong>Note:</strong> If you enter incorrect credentials, the system will display an error message. Ensure your caps lock is off.
         </div>
         <div class="img-wrapper">
-            <img src="images/loginPage.jpeg" alt="Login Page View" class="help-img" onerror="this.style.display='none'">
+            <img src="images/loginPage.png" alt="Login Page View" class="help-img" onerror="this.style.display='none'">
         </div>
     </div>
 
@@ -39,7 +39,7 @@
             <li>Click <strong>Submit</strong> to save the booking.</li>
         </ul>
         <div class="img-wrapper">
-            <img src="images/addReservation.jpeg" alt="Reservation Entry Form" class="help-img" onerror="this.style.display='none'">
+            <img src="images/addReservation.png" alt="Reservation Entry Form" class="help-img" onerror="this.style.display='none'">
         </div>
     </div>
 
@@ -53,8 +53,8 @@
             <li>Use the <strong>Delete</strong> button to remove a cancelled booking permanently.</li>
         </ul>
         <div class="img-wrapper">
-            <img src="images/viewReservations.jpeg" alt="View List" class="help-img" onerror="this.style.display='none'" style="margin-bottom: 10px;">
-            <img src="images/updateReservation.jpeg" alt="Update Form" class="help-img" onerror="this.style.display='none'">
+            <img src="images/viewReservations.png" alt="View List" class="help-img" onerror="this.style.display='none'" style="margin-bottom: 10px;">
+            <img src="images/updateReservation.png" alt="Update Form" class="help-img" onerror="this.style.display='none'">
         </div>
     </div>
 
@@ -68,8 +68,8 @@
             <li>Click <strong>Print Invoice</strong> to generate a physical copy for the guest.</li>
         </ul>
         <div class="img-wrapper">
-            <img src="images/calculateBill.jpeg" alt="Calculation Interface" class="help-img" onerror="this.style.display='none'" style="margin-bottom: 10px;">
-            <img src="images/printBill.jpeg" alt="Invoice Preview" class="help-img" onerror="this.style.display='none'">
+            <img src="images/calculateBill.png" alt="Calculation Interface" class="help-img" onerror="this.style.display='none'" style="margin-bottom: 10px;">
+            <img src="images/printBill.png" alt="Invoice Preview" class="help-img" onerror="this.style.display='none'">
         </div>
     </div>
 
