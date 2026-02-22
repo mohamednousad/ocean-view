@@ -66,7 +66,7 @@
             </button>
         </form>
 
-        <div class="error">
+        <div class="error" style="margin-top: 10px;">
             <%=request.getAttribute("error")!=null ? request.getAttribute("error") : ""%>
         </div>
     </div>

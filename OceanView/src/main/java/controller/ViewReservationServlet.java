@@ -2,6 +2,8 @@ package controller;
 
 import dao.ReservationDAO;
 import model.Reservation;
+import service.ReservationService;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +14,8 @@ import java.util.List;
 @WebServlet("/ViewReservationServlet")
 public class ViewReservationServlet extends HttpServlet {
     private ReservationDAO dao = new ReservationDAO();
-
+    private ReservationService service = new ReservationService();
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         loadReservations(request, response);
@@ -20,6 +23,8 @@ public class ViewReservationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+
 
         String action = request.getParameter("action");
         String id = request.getParameter("reservationNo");
@@ -29,17 +34,27 @@ public class ViewReservationServlet extends HttpServlet {
             if (r != null) {
                 request.setAttribute("reservation", r);
             } else {
-                request.setAttribute("msg", "Reservation not found.");
+                request.setAttribute("error", "Reservation not found.");
             }
         } 
         else if ("delete".equals(action)) {
             if (dao.delete(id)) {
                 request.setAttribute("msg", "Deleted Successfully");
             } else {
-                request.setAttribute("msg", "Delete Failed");
+                request.setAttribute("error", "Delete Failed");
             }
         } 
         else if ("update".equals(action)) {
+            String checkIn = request.getParameter("checkIn");
+            String checkOut = request.getParameter("checkOut");
+
+            String dateError = service.validateDates(checkIn, checkOut);
+
+            if (dateError != null) {
+                request.setAttribute("error", dateError);
+                return;
+            }
+            
             Reservation r = new Reservation();
             r.setReservationNo(id);
             r.setGuestName(request.getParameter("guestName"));
@@ -53,7 +68,7 @@ public class ViewReservationServlet extends HttpServlet {
                 request.setAttribute("msg", "Updated Successfully");
                 request.setAttribute("reservation", r); 
             } else {
-                request.setAttribute("msg", "Update Failed");
+                request.setAttribute("error", "Update Failed");
             }
         }
 

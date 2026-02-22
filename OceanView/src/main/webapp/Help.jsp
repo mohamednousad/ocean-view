@@ -53,7 +53,7 @@
             <li>Use the <strong>Delete</strong> button to remove a cancelled booking permanently.</li>
         </ul>
         <div class="img-wrapper">
-            <img src="images/viewReservation.jpeg" alt="View List" class="help-img" onerror="this.style.display='none'" style="margin-bottom: 10px;">
+            <img src="images/viewReservations.jpeg" alt="View List" class="help-img" onerror="this.style.display='none'" style="margin-bottom: 10px;">
             <img src="images/updateReservation.jpeg" alt="Update Form" class="help-img" onerror="this.style.display='none'">
         </div>
     </div>

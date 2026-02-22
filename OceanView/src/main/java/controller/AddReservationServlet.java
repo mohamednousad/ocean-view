@@ -2,6 +2,7 @@ package controller;
 
 import dao.ReservationDAO;
 import model.Reservation;
+import service.ReservationService;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +11,20 @@ import javax.servlet.http.*;
 @WebServlet("/AddReservationServlet")
 public class AddReservationServlet extends HttpServlet {
     private ReservationDAO dao = new ReservationDAO();
+    private ReservationService service = new ReservationService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String checkIn = request.getParameter("checkIn");
+        String checkOut = request.getParameter("checkOut");
+
+        String dateError = service.validateDates(checkIn, checkOut);
+
+        if (dateError != null) {
+            request.setAttribute("error", dateError);
+        }
+        else {
         Reservation reservation = new Reservation();
         reservation.setGuestName(request.getParameter("guestName"));
         reservation.setAddress(request.getParameter("address"));
@@ -25,10 +36,11 @@ public class AddReservationServlet extends HttpServlet {
         String newID = dao.create(reservation);
 
         if (newID != null) {
-            request.setAttribute("msg", "Added Successfully!: " + newID);
+            request.setAttribute("msg", "Added Successfully: " + newID);
         } else {
-            request.setAttribute("msg", "Error adding reservation.");
+            request.setAttribute("error", "Error adding reservation.");
         }
+         }
         request.getRequestDispatcher("ViewReservationServlet").forward(request, response);
     }
 }

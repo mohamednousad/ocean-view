@@ -25,7 +25,8 @@
             <input type="text" id="searchInput" class="search-input" placeholder="Search reservations (ID, Name, Contact, Room, Date)...">
         </div>
 
-        <div class="msg" style="color: green; margin-bottom: 10px;"><%= request.getAttribute("msg") != null ? request.getAttribute("msg") : "" %></div>
+        <div class="msg"><%= request.getAttribute("msg") != null ? request.getAttribute("msg") : "" %></div>
+        <div class="error"><%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %></div>
         
         <div class="table-responsive">
            <table id="reservationTable">
@@ -62,7 +63,7 @@
 			            <td><%= r.getCheckOut() %></td>
 			            <td><%= days %> Days</td>
 			             <td class="text-center">
-                            <button class="btn primary" onclick="openModal('edit', '<%= r.getReservationNo() %>', '<%= r.getGuestName() %>', '<%= r.getContact() %>', '<%= r.getRoomType() %>', '<%= r.getCheckIn() %>', '<%= r.getCheckOut() %>', '<%= r.getAddress() %>')">
+                            <button class="btn secondary" onclick="openModal('edit', '<%= r.getReservationNo() %>', '<%= r.getGuestName() %>', '<%= r.getContact() %>', '<%= r.getRoomType() %>', '<%= r.getCheckIn() %>', '<%= r.getCheckOut() %>', '<%= r.getAddress() %>')">
                                 <i class="fa-solid fa-pen-to-square"></i> Edit
                             </button>
                             <button class="btn delete" onclick="openDeleteModal('<%= r.getReservationNo() %>')">
@@ -107,19 +108,19 @@
                         <option value="Suite">Suite</option>
                     </select>
                 </div>
-                
-                <div class="date-row">
-                    <div class="input-group">
-                        <label class="modal-label">Check In</label>
-                        <input type="date" name="checkIn" id="modalCheckIn" class="modal-input" required>
-                    </div>
-                    <div class="input-group">
-                        <label class="modal-label">Check Out</label>
-                        <input type="date" name="checkOut" id="modalCheckOut" class="modal-input" required>
-                    </div>
-                </div>
-                
-                <div class="input-group full-width">
+				<div class="date-row">
+				    <div class="input-group">
+				        <label class="modal-label">Check In</label>
+				        <input type="date" name="checkIn" id="modalCheckIn" class="modal-input" required style="margin-bottom: 2px;">
+				        <span id="checkInError" class="error" style="color: #d93025; font-size: 0.7rem; margin-top: 2px; min-height: 16px; display: flex; align-items: center; gap: 4px;"></span>
+				    </div>
+				    <div class="input-group">
+				        <label class="modal-label">Check Out</label>
+				        <input type="date" name="checkOut" id="modalCheckOut" class="modal-input" required style="margin-bottom: 2px;">
+				        <span id="checkOutError" class="error" style="color: #d93025; font-size: 0.7rem; margin-top: 2px; min-height: 16px; display: flex; align-items: center; gap: 4px;"></span>
+				    </div>
+				</div>
+				 <div class="input-group full-width">
                     <label class="modal-label">Residential Address</label>
                     <textarea name="address" id="modalAddress" class="modal-textarea" placeholder="Enter Residential Address" required></textarea>
                 </div>
@@ -147,6 +148,70 @@
         </div>
     </div>
 
+<script>
+function validateDates() {
+    let checkInInput = document.getElementById("modalCheckIn").value;
+    let checkOutInput = document.getElementById("modalCheckOut").value;
+    let checkInError = document.getElementById("checkInError");
+    let checkOutError = document.getElementById("checkOutError");
+    let errorIcon = '<i class="fa-solid fa-circle-exclamation"></i> ';
+
+    checkInError.innerHTML = "";
+    checkOutError.innerHTML = "";
+    let isValid = true;
+
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (checkInInput) {
+        let checkInDate = new Date(checkInInput);
+        checkInDate.setHours(0, 0, 0, 0);
+        if (checkInDate < today) {
+            checkInError.innerHTML = errorIcon + "Date cannot be in the past.";
+            isValid = false;
+        }
+    }
+
+    if (checkOutInput) {
+        let checkOutDate = new Date(checkOutInput);
+        checkOutDate.setHours(0, 0, 0, 0);
+        if (checkOutDate < today) {
+            checkOutError.innerHTML = errorIcon + "Date cannot be in the past.";
+            isValid = false;
+        }
+    }
+
+    if (checkInInput && checkOutInput && isValid) {
+        let checkInDate = new Date(checkInInput);
+        checkInDate.setHours(0, 0, 0, 0);
+        let checkOutDate = new Date(checkOutInput);
+        checkOutDate.setHours(0, 0, 0, 0);
+
+        if (checkInDate > checkOutDate) {
+            checkOutError.innerHTML = errorIcon + "Must be after check-in date.";
+            isValid = false;
+        }
+    }
+
+    if (!isValid) {
+        setTimeout(() => {
+            checkInError.innerHTML = "";
+            checkOutError.innerHTML = "";
+        }, 2500);
+    }
+
+    return isValid;
+}
+
+document.getElementById("modalCheckIn").addEventListener("change", validateDates);
+document.getElementById("modalCheckOut").addEventListener("change", validateDates);
+
+document.getElementById("reservationForm").addEventListener("submit", function(event) {
+    if (!validateDates()) {
+        event.preventDefault();
+    }
+});
+</script>
 <script src="./js/script.js"></script>
 </body>
 </html>
