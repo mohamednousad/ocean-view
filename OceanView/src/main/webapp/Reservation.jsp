@@ -148,6 +148,166 @@
     </div>
 
 <script>
+const observer = new MutationObserver(function() {
+    if (document.getElementById('reservationModal').style.display === 'none') {
+        document.getElementById('reservationForm').reset();
+
+        [guestNameInput, contactInput, addressInput, checkInInput, checkOutInput].forEach(input => {
+            clearError(input);
+            input.style.borderColor = '';
+        });
+
+        document.getElementById('checkInError').textContent = '';
+        document.getElementById('checkOutError').textContent = '';
+        document.getElementById('modalRoomType').style.borderColor = '';
+    }
+});
+
+observer.observe(document.getElementById('reservationModal'), {
+    attributes: true,
+    attributeFilter: ['style']
+});
+document.getElementById("modalCheckIn").addEventListener("change", validateDates);
+document.getElementById("modalCheckOut").addEventListener("change", validateDates);
+
+document.getElementById("reservationForm").addEventListener("submit", function(event) {
+    if (!validateDates()) {
+        event.preventDefault();
+    }
+});
+document.getElementById('reservationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (validateForm()) this.submit();
+});
+
+const guestNameInput = document.getElementById('modalGuestName');
+const contactInput = document.getElementById('modalContact');
+const addressInput = document.getElementById('modalAddress');
+const checkInInput = document.getElementById('modalCheckIn');
+const checkOutInput = document.getElementById('modalCheckOut');
+
+function getOrCreateError(input) {
+    let err = input.parentElement.querySelector('.field-error');
+    if (!err) {
+        err = document.createElement('span');
+        err.className = 'field-error';
+        err.style.cssText = 'color:#d93025;font-size:0.7rem;margin-top:2px;min-height:16px;display:flex;align-items:center;gap:4px;';
+        input.parentElement.appendChild(err);
+    }
+    return err;
+}
+
+function showError(input, msg) {
+    const err = getOrCreateError(input);
+    err.textContent = msg;
+    input.style.borderColor = '#d93025';
+}
+
+function clearError(input) {
+    const err = getOrCreateError(input);
+    err.textContent = '';
+    input.style.borderColor = '';
+}
+
+guestNameInput.addEventListener('input', function() {
+    this.value = this.value.replace(/[^a-zA-Z\s.'-]/g, '');
+    validateGuestName();
+});
+
+guestNameInput.addEventListener('blur', validateGuestName);
+
+function validateGuestName() {
+    const val = guestNameInput.value.trim();
+    if (!val) {
+        showError(guestNameInput, 'Guest name is required.');
+        return false;
+    }
+    if (val.length < 3) {
+        showError(guestNameInput, 'Name must be at least 3 characters.');
+        return false;
+    }
+    if (val.length > 100) {
+        showError(guestNameInput, 'Name must not exceed 100 characters.');
+        return false;
+    }
+    if (!/^[a-zA-Z]/.test(val)) {
+        showError(guestNameInput, 'Name must start with a letter.');
+        return false;
+    }
+    if (/\s{2,}/.test(val)) {
+        showError(guestNameInput, 'Name must not contain consecutive spaces.');
+        return false;
+    }
+    clearError(guestNameInput);
+    return true;
+}
+
+contactInput.addEventListener('input', function() {
+    this.value = this.value.replace(/[^0-9+\-()\s]/g, '');
+    validateContact();
+});
+
+contactInput.addEventListener('blur', validateContact);
+
+function validateContact() {
+    const val = contactInput.value.trim();
+    const digits = val.replace(/\D/g, '');
+    if (!val) {
+        showError(contactInput, 'Contact number is required.');
+        return false;
+    }
+    if (digits.length < 7) {
+        showError(contactInput, 'Contact must have at least 7 digits.');
+        return false;
+    }
+    if (digits.length > 15) {
+        showError(contactInput, 'Contact must not exceed 15 digits.');
+        return false;
+    }
+    if (/^0+$/.test(digits)) {
+        showError(contactInput, 'Enter a valid contact number.');
+        return false;
+    }
+    clearError(contactInput);
+    return true;
+}
+
+addressInput.addEventListener('input', validateAddress);
+addressInput.addEventListener('blur', validateAddress);
+
+function validateAddress() {
+    const val = addressInput.value.trim();
+    if (!val) {
+        showError(addressInput, 'Residential address is required.');
+        return false;
+    }
+    if (val.length < 10) {
+        showError(addressInput, 'Address must be at least 10 characters.');
+        return false;
+    }
+    if (val.length > 300) {
+        showError(addressInput, 'Address must not exceed 300 characters.');
+        return false;
+    }
+    if (!/[a-zA-Z]/.test(val)) {
+        showError(addressInput, 'Address must contain letters.');
+        return false;
+    }
+    if (!/\d/.test(val)) {
+        showError(addressInput, 'Address must include a street/house number.');
+        return false;
+    }
+    if (/(.)\1{4,}/.test(val)) {
+        showError(addressInput, 'Address contains invalid repeated characters.');
+        return false;
+    }
+    clearError(addressInput);
+    return true;
+}
+
+checkInInput.addEventListener('change', validateDates);
+checkOutInput.addEventListener('change', validateDates);
+
 function validateDates() {
     let checkInInput = document.getElementById("modalCheckIn").value;
     let checkOutInput = document.getElementById("modalCheckOut").value;
@@ -187,29 +347,28 @@ function validateDates() {
         checkOutDate.setHours(0, 0, 0, 0);
 
         if (checkInDate > checkOutDate) {
-            checkOutError.innerHTML = errorIcon + "Must be after check-in date.";
+            checkOutError.innerHTML = errorIcon + "Must be same or after check-in date.";
             isValid = false;
         }
-    }
-
-    if (!isValid) {
-        setTimeout(() => {
-            checkInError.innerHTML = "";
-            checkOutError.innerHTML = "";
-        }, 2500);
     }
 
     return isValid;
 }
 
-document.getElementById("modalCheckIn").addEventListener("change", validateDates);
-document.getElementById("modalCheckOut").addEventListener("change", validateDates);
-
-document.getElementById("reservationForm").addEventListener("submit", function(event) {
-    if (!validateDates()) {
-        event.preventDefault();
+function validateForm() {
+    const n = validateGuestName();
+    const c = validateContact();
+    const a = validateAddress();
+    const d = validateDates();
+    const roomType = document.getElementById('modalRoomType');
+    if (!roomType.value) {
+        roomType.style.borderColor = '#d93025';
+    } else {
+        roomType.style.borderColor = '';
     }
-});
+    return n && c && a && d && !!roomType.value;
+}
+
 </script>
 <script src="./js/script.js"></script>
 </body>
