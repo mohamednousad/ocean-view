@@ -13,34 +13,42 @@ public class AddReservationServlet extends HttpServlet {
     private ReservationDAO dao = new ReservationDAO();
     private ReservationService service = new ReservationService();
 
+    String processReservation(String checkIn, String checkOut, String guestName, String address, String contact, String roomType) {
+        String dateError = service.validateDates(checkIn, checkOut);
+        if (dateError != null) {
+            return dateError;
+        }
+
+        Reservation reservation = new Reservation();
+        reservation.setGuestName(guestName);
+        reservation.setAddress(address);
+        reservation.setContact(contact);
+        reservation.setRoomType(roomType);
+        reservation.setCheckIn(checkIn);
+        reservation.setCheckOut(checkOut);
+
+        String newID = dao.create(reservation);
+        return newID != null ? "Added Successfully: " + newID : "Error adding reservation.";
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String checkIn = request.getParameter("checkIn");
-        String checkOut = request.getParameter("checkOut");
+        String result = processReservation(
+            request.getParameter("checkIn"),
+            request.getParameter("checkOut"),
+            request.getParameter("guestName"),
+            request.getParameter("address"),
+            request.getParameter("contact"),
+            request.getParameter("roomType")
+        );
 
-        String dateError = service.validateDates(checkIn, checkOut);
-
-        if (dateError != null) {
-            request.setAttribute("error", dateError);
-        }
-        else {
-        Reservation reservation = new Reservation();
-        reservation.setGuestName(request.getParameter("guestName"));
-        reservation.setAddress(request.getParameter("address"));
-        reservation.setContact(request.getParameter("contact"));
-        reservation.setRoomType(request.getParameter("roomType"));
-        reservation.setCheckIn(request.getParameter("checkIn"));
-        reservation.setCheckOut(request.getParameter("checkOut"));
-
-        String newID = dao.create(reservation);
-
-        if (newID != null) {
-            request.setAttribute("msg", "Added Successfully: " + newID);
+        if (result.startsWith("Added Successfully")) {
+            request.setAttribute("msg", result);
         } else {
-            request.setAttribute("error", "Error adding reservation.");
+            request.setAttribute("error", result);
         }
-         }
+
         request.getRequestDispatcher("ViewReservationServlet").forward(request, response);
     }
 }
