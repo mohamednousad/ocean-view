@@ -44,16 +44,16 @@ public class ReservationService {
             LocalDate today = LocalDate.now();
 
             if (checkIn.isBefore(today) || checkOut.isBefore(today)) {
-                return "Dates cannot be in the past.";
+                return "Dates cannot be in the past";
             }
 
             if (checkIn.isAfter(checkOut)) {
-                return "Check-in date must be before the check-out date.";
+                return "Check-in date must be same or before the check-out date";
             }
             
             return null;
         } catch (Exception e) {
-            return "Invalid date format.";
+            return "Invalid date format";
         }
     }
 }

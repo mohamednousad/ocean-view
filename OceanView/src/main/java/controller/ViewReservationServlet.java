@@ -21,7 +21,7 @@ public class ViewReservationServlet extends HttpServlet {
         loadReservations(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
 
