@@ -16,7 +16,7 @@ public class LoginServlet extends HttpServlet {
             return "Please fill all required fields.";
         }
         try {
-            if (userDAO.validate(username, password)) {
+            if (userDAO.login(username, password)) {
                 return "Login Successful";
             } else {
                 return "Invalid Credentials";
