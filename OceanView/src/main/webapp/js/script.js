@@ -31,47 +31,43 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
   }
       });
 
-  function openModal(mode, no = '', name = '', contact = '', room = '', inDate = '', outDate = '', address = '') {
-      var form = document.getElementById("reservationForm");
-      var title = document.getElementById("modalTitle");
-      var btn = document.getElementById("modalSubmitBtn");
-      var actionInput = document.getElementById("modalAction");
+const modalFields = {
+     reservationNo: "modalReservationNo",
+     guestName:     "modalGuestName",
+     contact:       "modalContact",
+     roomType:      "modalRoomType",
+     checkIn:       "modalCheckIn",
+     checkOut:      "modalCheckOut",
+     address:       "modalAddress"
+ };
 
-      if (mode === 'add') {
-          form.action = "AddReservationServlet";
-          title.innerText = "Add New Reservation";
-          btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Changes';
-          
-          document.getElementById("modalReservationNo").value = "";
-          document.getElementById("modalGuestName").value = "";
-          document.getElementById("modalContact").value = "";
-          document.getElementById("modalRoomType").value = "";
-          document.getElementById("modalCheckIn").value = "";
-          document.getElementById("modalCheckOut").value = "";
-          document.getElementById("modalAddress").value = "";
-          
-          actionInput.disabled = true;
+ function openModal(mode, no = '', name = '', contact = '', room = '', inDate = '', outDate = '', address = '') {
+     const values = { reservationNo: no, guestName: name, contact, roomType: room, checkIn: inDate, checkOut: outDate, address };
+     const isAdd = mode === 'add';
 
-      } else {
-          form.action = "ViewReservationServlet";
-          title.innerText = "Update Reservation";
-          btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Changes';
-          
-          document.getElementById("modalReservationNo").value = no;
-          document.getElementById("modalGuestName").value = name;
-          document.getElementById("modalContact").value = contact;
-          document.getElementById("modalRoomType").value = room;
-          document.getElementById("modalCheckIn").value = inDate;
-          document.getElementById("modalCheckOut").value = outDate;
-          document.getElementById("modalAddress").value = address;
+     document.getElementById("modalTitle").innerText = isAdd ? "Add New Reservation" : "Update Reservation";
+     document.getElementById("modalAction").value = isAdd ? "add" : "update";
 
-          actionInput.disabled = false;
-          actionInput.value = "update";
-      }
+     Object.entries(modalFields).forEach(([key, id]) => {
+         document.getElementById(id).value = isAdd ? "" : (values[key] || "");
+     });
 
-      document.getElementById("reservationModal").style.display = "flex";
-  }
+     document.getElementById("reservationModal").style.display = "flex";
+ }
 
+ function openDeleteModal(id) {
+     document.getElementById("deleteReservationNo").value = id;
+     document.getElementById("deleteDisplayId").innerText = "#" + id;
+     document.getElementById("deleteModal").style.display = "flex";
+ }
+
+ function closeModal() {
+     document.getElementById("reservationModal").style.display = "none";
+ }
+
+ function closeDeleteModal() {
+     document.getElementById("deleteModal").style.display = "none";
+ }
   function closeModal() {
       document.getElementById("reservationModal").style.display = "none";
   }

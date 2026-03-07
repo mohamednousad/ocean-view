@@ -58,7 +58,7 @@
         </div>
 
         <div class="bill-actions">
-            <button class="btn secondary" onclick="window.location='Bill.jsp'">
+            <button class="btn secondary" onclick="window.location='BillServlet'">
                 Back
             </button>
             <button class="btn primary" onclick="window.print()">

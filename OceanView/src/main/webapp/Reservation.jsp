@@ -81,72 +81,76 @@
         </div>
     </div>
 
-    <div class="modal" id="reservationModal">
-        <div class="modal-content">
-            <h3 id="modalTitle">Reservation Details</h3>
-            <form id="reservationForm" method="post" class="modal-form-grid">
-                <input type="hidden" name="reservationNo" id="modalReservationNo">
-                <input type="hidden" name="action" id="modalAction">
-
-                <div class="input-group">
-                    <label class="modal-label">Guest Name</label>
-                    <input type="text" name="guestName" id="modalGuestName" class="modal-input" placeholder="Enter Guest Name" required>
-                </div>
-                
-                <div class="input-group">
-                    <label class="modal-label">Contact</label>
-                    <input type="text" name="contact" id="modalContact" class="modal-input" placeholder="Enter Contact Number" required>
-                </div>
-                
-                <div class="input-group">
-                    <label class="modal-label">Room Type</label>
-                    <select name="roomType" id="modalRoomType" class="modal-select" required>
-                        <option value="">Select Room Type</option>
-                        <option value="Standard">Standard</option>
-                        <option value="Deluxe">Deluxe</option>
-                        <option value="Suite">Suite</option>
-                    </select>
-                </div>
-				<div class="date-row">
-				    <div class="input-group">
-				        <label class="modal-label">Check In</label>
-				        <input type="date" name="checkIn" id="modalCheckIn" class="modal-input" required style="margin-bottom: 2px;">
-				        <span id="checkInError" class="error" style="color: #d93025; font-size: 0.7rem; margin-top: 2px; min-height: 16px; display: flex; align-items: center; gap: 4px;"></span>
-				    </div>
-				    <div class="input-group">
-				        <label class="modal-label">Check Out</label>
-				        <input type="date" name="checkOut" id="modalCheckOut" class="modal-input" required style="margin-bottom: 2px;">
-				        <span id="checkOutError" class="error" style="color: #d93025; font-size: 0.7rem; margin-top: 2px; min-height: 16px; display: flex; align-items: center; gap: 4px;"></span>
-				    </div>
-				</div>
-				 <div class="input-group full-width">
-                    <label class="modal-label">Residential Address</label>
-                    <textarea name="address" id="modalAddress" class="modal-textarea" placeholder="Enter Residential Address" required></textarea>
-                </div>
-                
-                <div class="modal-actions full-width">
-                    <button type="button" class="btn cancel" onclick="closeModal()">Cancel</button>              
-                    <button type="submit" class="btn primary" id="modalSubmitBtn"><i class="fa-solid fa-floppy-disk"></i> Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    
-    <div class="modal" id="deleteModal">
-        <div class="modal-content delete-modal-content">
-            <h3>Delete Reservation</h3>            
-            <p>Are you sure you want to delete reservation <strong id="deleteDisplayId"></strong>?</p>
-            <form action="ViewReservationServlet" method="post">
-                <input type="hidden" name="reservationNo" id="deleteReservationNo">
-                <input type="hidden" name="action" value="delete">
-                <div class="modal-actions center-actions">
-                    <button type="button" class="btn cancel" onclick="closeDeleteModal()">Cancel</button>
-                    <button type="submit" class="btn delete">Yes, Delete</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
+	<div class="modal" id="reservationModal">
+	    <div class="modal-content">
+	        <h3 id="modalTitle">Reservation Details</h3>
+	        <form id="reservationForm" action="ReservationServlet" method="post" class="modal-form-grid">
+	            <input type="hidden" name="reservationNo" id="modalReservationNo">
+	            <input type="hidden" name="action" id="modalAction">
+	
+	            <div class="input-group">
+	                <label class="modal-label">Guest Name</label>
+	                <input type="text" name="guestName" id="modalGuestName" class="modal-input" placeholder="Enter Guest Name" required>
+	            </div>
+	
+	            <div class="input-group">
+	                <label class="modal-label">Contact</label>
+	                <input type="text" name="contact" id="modalContact" class="modal-input" placeholder="Enter Contact Number" required>
+	            </div>
+	
+	            <div class="input-group">
+	                <label class="modal-label">Room Type</label>
+	                <select name="roomType" id="modalRoomType" class="modal-select" required>
+	                    <option value="">Select Room Type</option>
+	                    <option value="Standard">Standard</option>
+	                    <option value="Deluxe">Deluxe</option>
+	                    <option value="Suite">Suite</option>
+	                </select>
+	            </div>
+	
+	            <div class="date-row">
+	                <div class="input-group">
+	                    <label class="modal-label">Check In</label>
+	                    <input type="date" name="checkIn" id="modalCheckIn" class="modal-input" required>
+	                    <span id="checkInError" class="error" style="color: #d93025; font-size: 0.7rem; margin-top: 2px; min-height: 16px; display: flex; align-items: center; gap: 4px;"></span>
+	                </div>
+	                <div class="input-group">
+	                    <label class="modal-label">Check Out</label>
+	                    <input type="date" name="checkOut" id="modalCheckOut" class="modal-input" required>
+	                    <span id="checkOutError" class="error" style="color: #d93025; font-size: 0.7rem; margin-top: 2px; min-height: 16px; display: flex; align-items: center; gap: 4px;"></span>
+	                </div>
+	            </div>
+	
+	            <div class="input-group full-width">
+	                <label class="modal-label">Residential Address</label>
+	                <textarea name="address" id="modalAddress" class="modal-textarea" placeholder="Enter Residential Address" required></textarea>
+	            </div>
+	
+	            <div class="modal-actions full-width">
+	                <button type="button" class="btn cancel" onclick="closeModal()">Cancel</button>
+	                <button type="submit" class="btn primary" id="modalSubmitBtn">
+	                    <i class="fa-solid fa-floppy-disk"></i> Save Changes
+	                </button>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+	
+	<div class="modal" id="deleteModal">
+	    <div class="modal-content delete-modal-content">
+	        <h3>Delete Reservation</h3>
+	        <p>Are you sure you want to delete reservation <strong id="deleteDisplayId"></strong>?</p>
+	        <form action="ReservationServlet" method="post">
+	            <input type="hidden" name="reservationNo" id="deleteReservationNo">
+	            <input type="hidden" name="action" value="delete">
+	            <div class="modal-actions center-actions">
+	                <button type="button" class="btn cancel" onclick="closeDeleteModal()">Cancel</button>
+	                <button type="submit" class="btn delete">Yes, Delete</button>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+   
 <script>
 const observer = new MutationObserver(function() {
     if (document.getElementById('reservationModal').style.display === 'none') {
