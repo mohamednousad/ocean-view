@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 public class UserDAO {
     
-	public boolean validate(String username, String password) throws Exception {
+	public boolean login(String username, String password) throws Exception {
         boolean status = false;
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE username=? AND password=?")) {
