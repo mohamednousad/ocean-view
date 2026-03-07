@@ -17,12 +17,12 @@
 
 <div class="dashboard-wrapper">
     <div class="sidebar">
-        <h2><img src="logo.ico" alt="Logo" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;"> Welcome, <%= session.getAttribute("username") %>!</h2>
-        <a href="ViewReservationServlet" target="contentFrame" class="active" onclick="setActive(this)">
+        <h2>Welcome, <%= session.getAttribute("username") %>!</h2>
+        <a href="ReservationServlet" target="contentFrame" class="active" onclick="setActive(this)">
             <i class="fa-solid fa-list-check"></i> Reservations
         </a>
         
-        <a href="Bill.jsp" target="contentFrame" onclick="setActive(this)">
+        <a href="BillServlet" target="contentFrame" onclick="setActive(this)">
             <i class="fa-solid fa-file-invoice-dollar"></i> Calculate Bill
         </a>
         
@@ -37,7 +37,7 @@
 
     <div class="main">
         <div class="content">
-            <iframe name="contentFrame" src="ViewReservationServlet"></iframe>
+            <iframe name="contentFrame" src="ReservationServlet"></iframe>
         </div>
         <div class="footer">
             &copy; 2026 Ocean View Resort. All Rights Reserved.

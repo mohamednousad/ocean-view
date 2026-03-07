@@ -1,4 +1,5 @@
-<%@ page import="java.sql.*" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Reservation" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +21,7 @@
     <div class="bill-card">
         <h2 class="bill-title">Calculate Bill</h2>
         
-        <form action="BillServlet" method="post">
+       <form action="BillServlet" method="post">
             <div class="input-group">
                 <label class="modal-label">Search Reservations</label>
                 <div class="search-wrapper">
@@ -33,29 +34,16 @@
                 <label class="modal-label">Select Reservation</label>
                 <select name="reservationNo" id="reservationSelect" class="form-select" required size="5">
                     <%
-                    Connection con=null;
-                    PreparedStatement ps=null;
-                    ResultSet rs=null;
-
-                    try{
-                        Class.forName("com.mysql.cj.jdbc.Driver");
-                        con=DriverManager.getConnection("jdbc:mysql://localhost:3306/oceanview","root","");
-                        ps=con.prepareStatement("SELECT reservation_no, guest_name FROM reservations ORDER BY reservation_no DESC");
-                        rs=ps.executeQuery();
-
-                        while(rs.next()){
+                        List<Reservation> reservationList = (List<Reservation>) request.getAttribute("reservations");
+                        if (reservationList != null) {
+                            for (Reservation r : reservationList) {
                     %>
-                    <option value="<%=rs.getString("reservation_no")%>">
-                        #<%=rs.getString("reservation_no")%> - <%=rs.getString("guest_name")%>
+                    <option value="<%= r.getReservationNo() %>">
+                        #<%= r.getReservationNo() %> - <%= r.getGuestName() %>
                     </option>
                     <%
+                            }
                         }
-                    }catch(Exception e){
-                    }finally{
-                        if(rs!=null) rs.close();
-                        if(ps!=null) ps.close();
-                        if(con!=null) con.close();
-                    }
                     %>
                 </select>
             </div>
