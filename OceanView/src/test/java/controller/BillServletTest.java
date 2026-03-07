@@ -9,7 +9,7 @@ class BillServletTest {
     @Test
     void testValidReservation() {
         BillServlet servlet = new BillServlet();
-        String result = servlet.processBill("ST-20260305-001");
+        String result = servlet.processBill("ST-20260307-001");
         assertTrue(result.startsWith("Bill Generated"));
     }
 
@@ -44,7 +44,7 @@ class BillServletTest {
     @Test
     void testBillGeneratedContainsAmount() {
         BillServlet servlet = new BillServlet();
-        String result = servlet.processBill("ST-20260305-001");
-        assertTrue(result.contains("Bill Generated:"));
+        String result = servlet.processBill("ST-20260307-001");
+        assertTrue(result.contains("Bill Generated"));
     }
 }

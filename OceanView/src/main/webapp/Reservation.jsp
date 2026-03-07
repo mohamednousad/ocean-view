@@ -195,7 +195,7 @@ function getOrCreateError(input) {
     if (!err) {
         err = document.createElement('span');
         err.className = 'field-error';
-        err.style.cssText = 'color:#d93025;font-size:0.7rem;margin-top:2px;min-height:16px;display:flex;align-items:center;gap:4px;';
+        err.style.cssText = 'color:#d93025;font-size:0.8rem;margin-top:2px;min-height:16px;display:flex;align-items:center;gap:4px;';
         input.parentElement.appendChild(err);
     }
     return err;
