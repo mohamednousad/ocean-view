@@ -26,7 +26,7 @@ public class BillServlet extends HttpServlet {
         if (total <= 0) {
             return "Invalid billing calculation";
         }
-        return "Bill Generated: " + total;
+        return "Bill Generated" + ": " + total;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
